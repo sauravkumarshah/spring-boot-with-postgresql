@@ -1,7 +1,6 @@
 package com.springboot.postgres.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import com.springboot.postgres.entity.Employee;
 import com.springboot.postgres.repository.IRepository;
 import com.springboot.postgres.request.EmployeeRequest;
 import com.springboot.postgres.response.EmployeeDTO;
+import com.springboot.postgres.util.EmployeeUtil;
 
 @Service
 public class EmpoyeeService {
@@ -18,16 +18,16 @@ public class EmpoyeeService {
 	private IRepository repository;
 
 	public List<EmployeeDTO> employees() {
-		return repository.findAll().stream().map(this::mapToEmployeeDTO).toList();
+		return repository.findAll().stream().map(EmployeeUtil::mapToEmployeeDTO).toList();
 	}
 
 	public EmployeeDTO save(EmployeeRequest emp) {
 		Employee employee = Employee.builder().name(emp.getName()).address(emp.getAddress()).build();
-		return mapToEmployeeDTO(repository.save(employee));
+		return EmployeeUtil.mapToEmployeeDTO(repository.save(employee));
 	}
 
 	public String delete(Integer empId) {
-		Employee employee = repository.findById(empId).orElseThrow(() -> notFound(empId));
+		Employee employee = repository.findById(empId).orElseThrow(() -> EmployeeUtil.notFound(empId));
 		repository.delete(employee);
 		return "Employee with id=" + empId + " removed";
 	}
@@ -41,21 +41,13 @@ public class EmpoyeeService {
 	}
 
 	public EmployeeDTO employee(Integer empId) {
-		Employee employee = repository.findById(empId).orElseThrow(() -> notFound(empId));
-		return mapToEmployeeDTO(employee);
+		Employee employee = repository.findById(empId).orElseThrow(() -> EmployeeUtil.notFound(empId));
+		return EmployeeUtil.mapToEmployeeDTO(employee);
 	}
 
 	public EmployeeDTO update(EmployeeRequest emp) {
-		repository.findById(emp.getId()).orElseThrow(() -> notFound(emp.getId()));
+		repository.findById(emp.getId()).orElseThrow(() -> EmployeeUtil.notFound(emp.getId()));
 		Employee employee = Employee.builder().id(emp.getId()).name(emp.getName()).address(emp.getAddress()).build();
-		return mapToEmployeeDTO(repository.save(employee));
-	}
-
-	private NoSuchElementException notFound(Integer empId) {
-		return new NoSuchElementException("Employee with id=" + empId + " not found.");
-	}
-
-	private EmployeeDTO mapToEmployeeDTO(Employee emp) {
-		return EmployeeDTO.builder().id(emp.getId()).name(emp.getName()).address(emp.getAddress()).build();
+		return EmployeeUtil.mapToEmployeeDTO(repository.save(employee));
 	}
 }
