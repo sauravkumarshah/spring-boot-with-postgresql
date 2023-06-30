@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 //import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.postgres.entity.Employee;
@@ -29,6 +30,7 @@ import com.springboot.postgres.request.EmployeeRequest;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Testcontainers
 @TestMethodOrder(OrderAnnotation.class)
 class SpringBootPostgresqlApplicationTests {
 
