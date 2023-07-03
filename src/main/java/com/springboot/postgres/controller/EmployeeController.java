@@ -31,31 +31,31 @@ public class EmployeeController {
 		return empoyeeService.employees();
 	}
 
-	@GetMapping(value = "/employee/{id}")
+	@GetMapping(value = "/employees/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public EmployeeDTO employee(@PathVariable(value = "id") Integer empId) {
 		return empoyeeService.employee(empId);
 	}
 
-	@PostMapping(value = "/save")
+	@PostMapping(value = "/employees")
 	@ResponseStatus(HttpStatus.CREATED)
 	public EmployeeDTO save(@RequestBody EmployeeRequest emp) {
 		return empoyeeService.save(emp);
 	}
 
-	@DeleteMapping(value = "/deleteall")
+	@DeleteMapping(value = "/employees")
 	@ResponseStatus(HttpStatus.OK)
 	public String deleteAll() {
 		return empoyeeService.deleteAll();
 	}
 
-	@DeleteMapping(value = "/delete/{id}")
+	@DeleteMapping(value = "/employees/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public String delete(@PathVariable(value = "id") Integer empId) {
 		return empoyeeService.delete(empId);
 	}
 
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/employees")
 	@ResponseStatus(HttpStatus.OK)
 	public EmployeeDTO update(@RequestBody EmployeeRequest emp) {
 		return empoyeeService.update(emp);

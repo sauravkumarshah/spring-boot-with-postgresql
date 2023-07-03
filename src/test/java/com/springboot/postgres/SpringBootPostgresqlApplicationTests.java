@@ -88,7 +88,7 @@ class SpringBootPostgresqlApplicationTests {
 		for (EmployeeRequest employee : employees) {
 			String emp = objectMapper.writeValueAsString(employee);
 			mockMvc.perform(
-					MockMvcRequestBuilders.post("/api/v1/save").contentType(MediaType.APPLICATION_JSON).content(emp))
+					MockMvcRequestBuilders.post("/api/v1/employees").contentType(MediaType.APPLICATION_JSON).content(emp))
 					.andExpect(status().isCreated());
 		}
 		Assertions.assertEquals(5, repository.findAll().size());
@@ -104,14 +104,14 @@ class SpringBootPostgresqlApplicationTests {
 	@Test
 	@Order(value = 4)
 	void testGetEmployeeById() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/employee/2")).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/employees/2")).andExpect(status().isOk());
 		Assertions.assertEquals(employees.get(1).getName(), repository.findById(2).get().getName());
 	}
 
 	@Test
 	@Order(value = 5)
 	void testDeleteEmployeeById() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/delete/2")).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/employees/2")).andExpect(status().isOk());
 	}
 
 	@Test
@@ -120,7 +120,7 @@ class SpringBootPostgresqlApplicationTests {
 		Employee employee = Employee.builder().id(3).name("Saurav Kumar Shah").address("India East").build();
 		String emp = objectMapper.writeValueAsString(employee);
 		mockMvc.perform(
-				MockMvcRequestBuilders.put("/api/v1/update").contentType(MediaType.APPLICATION_JSON).content(emp))
+				MockMvcRequestBuilders.put("/api/v1/employees").contentType(MediaType.APPLICATION_JSON).content(emp))
 				.andExpect(status().isOk());
 		Assertions.assertEquals(employee.getName(), repository.findById(3).get().getName());
 	}
@@ -128,7 +128,7 @@ class SpringBootPostgresqlApplicationTests {
 	@Test
 	@Order(value = 7)
 	void testDeleteAllEmployees() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/deleteall")).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/employees")).andExpect(status().isOk());
 		Assertions.assertEquals(0, repository.findAll().size());
 	}
 }
