@@ -1,4 +1,4 @@
-package com.springboot.postgres.exception;
+package com.kantar.template.exception;
 
 import java.util.NoSuchElementException;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.springboot.postgres.response.ErrorResponse;
+import com.kantar.template.response.ErrorResponse;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {

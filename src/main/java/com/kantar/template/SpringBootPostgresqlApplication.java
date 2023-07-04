@@ -1,4 +1,4 @@
-package com.springboot.postgres;
+package com.kantar.template;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

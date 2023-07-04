@@ -1,4 +1,4 @@
-package com.springboot.postgres.controller;
+package com.kantar.template.controller;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.postgres.request.EmployeeRequest;
-import com.springboot.postgres.response.EmployeeDTO;
-import com.springboot.postgres.service.EmpoyeeService;
+import com.kantar.template.request.EmployeeRequest;
+import com.kantar.template.response.EmployeeDTO;
+import com.kantar.template.service.EmpoyeeService;
 
 @RestController
 @RequestMapping(value = "/api/v1")

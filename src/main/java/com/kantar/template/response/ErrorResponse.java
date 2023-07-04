@@ -1,4 +1,4 @@
-package com.springboot.postgres.response;
+package com.kantar.template.response;
 
 import lombok.Builder;
 import lombok.Data;

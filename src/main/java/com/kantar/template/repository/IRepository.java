@@ -1,9 +1,9 @@
-package com.springboot.postgres.repository;
+package com.kantar.template.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.springboot.postgres.entity.Employee;
+import com.kantar.template.entity.Employee;
 
 @Repository
 public interface IRepository extends JpaRepository<Employee, Integer> {

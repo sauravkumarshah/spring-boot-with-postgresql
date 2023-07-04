@@ -1,4 +1,4 @@
-package com.springboot.postgres;
+package com.kantar.template;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,9 +24,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springboot.postgres.entity.Employee;
-import com.springboot.postgres.repository.IRepository;
-import com.springboot.postgres.request.EmployeeRequest;
+import com.kantar.template.entity.Employee;
+import com.kantar.template.repository.IRepository;
+import com.kantar.template.request.EmployeeRequest;
 
 @SpringBootTest
 @AutoConfigureMockMvc

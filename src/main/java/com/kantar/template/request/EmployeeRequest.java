@@ -1,4 +1,4 @@
-package com.springboot.postgres.response;
+package com.kantar.template.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDTO {
+public class EmployeeRequest {
 	private Integer id;
 	private String name;
 	private String address;

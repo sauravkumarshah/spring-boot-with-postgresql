@@ -1,4 +1,4 @@
-package com.springboot.postgres.entity;
+package com.kantar.template.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

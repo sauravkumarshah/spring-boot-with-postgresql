@@ -1,15 +1,15 @@
-package com.springboot.postgres.service;
+package com.kantar.template.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springboot.postgres.entity.Employee;
-import com.springboot.postgres.repository.IRepository;
-import com.springboot.postgres.request.EmployeeRequest;
-import com.springboot.postgres.response.EmployeeDTO;
-import com.springboot.postgres.util.EmployeeUtil;
+import com.kantar.template.entity.Employee;
+import com.kantar.template.repository.IRepository;
+import com.kantar.template.request.EmployeeRequest;
+import com.kantar.template.response.EmployeeDTO;
+import com.kantar.template.util.EmployeeUtil;
 
 @Service
 public class EmpoyeeService {

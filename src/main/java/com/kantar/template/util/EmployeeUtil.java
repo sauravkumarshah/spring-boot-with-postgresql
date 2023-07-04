@@ -1,9 +1,9 @@
-package com.springboot.postgres.util;
+package com.kantar.template.util;
 
 import java.util.NoSuchElementException;
 
-import com.springboot.postgres.entity.Employee;
-import com.springboot.postgres.response.EmployeeDTO;
+import com.kantar.template.entity.Employee;
+import com.kantar.template.response.EmployeeDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
