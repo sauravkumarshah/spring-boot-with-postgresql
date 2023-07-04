@@ -5,6 +5,9 @@ import java.util.NoSuchElementException;
 import com.springboot.postgres.entity.Employee;
 import com.springboot.postgres.response.EmployeeDTO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class EmployeeUtil {
 	private EmployeeUtil() {
 	}
@@ -14,6 +17,10 @@ public class EmployeeUtil {
 	}
 
 	public static EmployeeDTO mapToEmployeeDTO(Employee emp) {
-		return EmployeeDTO.builder().id(emp.getId()).name(emp.getName()).address(emp.getAddress()).build();
+		EmployeeDTO employeeDTO = EmployeeDTO.builder().id(emp.getId()).name(emp.getName()).address(emp.getAddress())
+				.build();
+
+		log.info("Employee details : {}", employeeDTO);
+		return employeeDTO;
 	}
 }

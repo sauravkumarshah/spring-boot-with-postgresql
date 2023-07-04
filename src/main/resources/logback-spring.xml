@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="logback-spring.xsd">
+
+	<springProfile name="dev">
+		<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+			</encoder>
+		</appender>
+		<logger name="com.springboot.postgres" level="debug">
+		<!--<logger name="com.springboot.postgres" level="${logging.level.root}">-->
+		<!--<logger name="com.springboot.postgres" level="${sys:logging.level:-debug}">-->
+			<appender-ref ref="console" />
+		</logger>
+	</springProfile>
+
+	<springProfile name="prod">
+		<appender name="file" class="ch.qos.logback.core.FileAppender">
+			<file>app.log</file>
+			<encoder>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+			</encoder>
+		</appender>
+		<logger name="com.springboot.postgres" level="info">
+			<appender-ref ref="file" />
+		</logger>
+	</springProfile>
+
+</configuration>
