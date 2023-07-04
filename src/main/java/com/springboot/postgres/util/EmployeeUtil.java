@@ -13,6 +13,7 @@ public class EmployeeUtil {
 	}
 
 	public static NoSuchElementException notFound(Integer empId) {
+		log.error("Employee with id=" + empId + " not found.");
 		return new NoSuchElementException("Employee with id=" + empId + " not found.");
 	}
 
