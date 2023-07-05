@@ -5,7 +5,9 @@ import java.util.NoSuchElementException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.kantar.template.entity.Employee;
+import com.kantar.template.entity.UserInfo;
 import com.kantar.template.response.EmployeeDTO;
+import com.kantar.template.response.UserInfoDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +27,13 @@ public class Utililty {
 
 		log.info("Employee details : {}", employeeDTO);
 		return employeeDTO;
+	}
+
+	public static UserInfoDTO mapToUserInfoDTO(UserInfo userInfo) {
+		UserInfoDTO userInfoDTO = UserInfoDTO.builder().id(userInfo.getId()).name(userInfo.getName())
+				.email(userInfo.getEmail()).roles(userInfo.getRoles()).build();
+		log.info("User details : {}", userInfoDTO);
+		return userInfoDTO;
 	}
 
 	public static UsernameNotFoundException usernameNotFoundException(String msg) {

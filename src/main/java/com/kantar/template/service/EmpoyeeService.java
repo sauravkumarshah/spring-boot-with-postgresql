@@ -3,13 +3,10 @@ package com.kantar.template.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kantar.template.entity.Employee;
-import com.kantar.template.entity.UserInfo;
 import com.kantar.template.repository.IEmployeeRepository;
-import com.kantar.template.repository.IUserInfoRepository;
 import com.kantar.template.request.EmployeeRequest;
 import com.kantar.template.response.EmployeeDTO;
 import com.kantar.template.util.Utililty;
@@ -25,14 +22,9 @@ import io.micrometer.observation.ObservationRegistry;
 @Service
 public class EmpoyeeService {
 
-	@Autowired
-	private PasswordEncoder encoder;
-
+	
 	@Autowired
 	private IEmployeeRepository repository;
-
-	@Autowired
-	private IUserInfoRepository userInfoRepository;
 
 	@Autowired
 	private ObservationRegistry registry;
@@ -113,17 +105,5 @@ public class EmpoyeeService {
 				.observe(() -> Utililty.mapToEmployeeDTO(repository.save(employee)));
 	}
 
-	public UserInfo addUser(UserInfo userInfo) {
-		try {
-			userInfo.setPassword(encoder.encode(userInfo.getPassword()));
-			return userInfoRepository.save(userInfo);
-		} catch (Exception e) {
-			throw e;
-		}
-
-	}
-
-	public List<UserInfo> users() {
-		return userInfoRepository.findAll();
-	}
+	
 }

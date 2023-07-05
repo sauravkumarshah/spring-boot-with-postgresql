@@ -30,15 +30,20 @@ public class ControllerExceptionHandler {
 				.getRequest();
 
 		problemDetail.setInstance(new URI(request.getRequestURI()));
-		problemDetail.setType(URI.create("http://api.employee.com/errors/not-found"));
+		problemDetail.setType(URI.create("http://api.employees.com/errors/not-found"));
 		problemDetail.setTitle("Element Not Found");
 		return problemDetail;
 	}
 
 	@ExceptionHandler(value = UsernameNotFoundException.class)
-	public ProblemDetail onUsernameNotFoundException(UsernameNotFoundException e) {
+	public ProblemDetail onUsernameNotFoundException(UsernameNotFoundException e) throws URISyntaxException {
 		ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
 
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+				.getRequest();
+
+		problemDetail.setInstance(new URI(request.getRequestURI()));
+		problemDetail.setType(URI.create("http://api.users.com/errors/username-not-found"));
 		problemDetail.setTitle("User Not Found");
 		return problemDetail;
 	}
