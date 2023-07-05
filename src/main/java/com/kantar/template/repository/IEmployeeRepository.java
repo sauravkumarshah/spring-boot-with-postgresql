@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.kantar.template.entity.Employee;
 
 @Repository
-public interface IRepository extends JpaRepository<Employee, Integer> {
+public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
 }

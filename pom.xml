@@ -34,12 +34,18 @@
 	    </profile>
 	</profiles>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-webflux</artifactId>
+	    </dependency>
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-security</artifactId>
+	    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -69,19 +75,29 @@
 		<dependency>
 		    <groupId>org.testcontainers</groupId>
 		    <artifactId>postgresql</artifactId>
-		    <version>1.18.3</version>
 		    <scope>test</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.testcontainers</groupId>
 		    <artifactId>junit-jupiter</artifactId>
-		    <version>1.18.3</version>
 		    <scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test -->
 		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-test</artifactId>
+		    <version>6.1.1</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<!--<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-logging</artifactId>
-		</dependency>
+		</dependency>-->
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
 	</dependencies>
 
 	<build>
@@ -98,10 +114,10 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 			    <groupId>org.graalvm.buildtools</groupId>
 			    <artifactId>native-maven-plugin</artifactId>
-			</plugin>
+			</plugin>-->
 		</plugins>
 		<resources>
 	        <resource>

@@ -14,18 +14,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
-//import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kantar.template.entity.Employee;
-import com.kantar.template.repository.IRepository;
+import com.kantar.template.repository.IEmployeeRepository;
 import com.kantar.template.request.EmployeeRequest;
 
 @SpringBootTest
@@ -38,7 +38,7 @@ class SpringBootPostgresqlApplicationTests {
 	private MockMvc mockMvc;
 
 	@Autowired
-	private IRepository repository;
+	private IEmployeeRepository repository;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -84,18 +84,19 @@ class SpringBootPostgresqlApplicationTests {
 
 	@Test
 	@Order(value = 2)
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	void testAddEmployees() throws Exception {
 		for (EmployeeRequest employee : employees) {
 			String emp = objectMapper.writeValueAsString(employee);
-			mockMvc.perform(
-					MockMvcRequestBuilders.post("/api/v1/employees").contentType(MediaType.APPLICATION_JSON).content(emp))
-					.andExpect(status().isCreated());
+			mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/employees").contentType(MediaType.APPLICATION_JSON)
+					.content(emp)).andExpect(status().isCreated());
 		}
 		Assertions.assertEquals(5, repository.findAll().size());
 	}
 
 	@Test
 	@Order(value = 3)
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	void testGetAllEmployees() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/employees")).andExpect(status().isOk());
 		Assertions.assertEquals(employees.get(3).getName(), repository.findById(4).get().getName());
@@ -103,6 +104,7 @@ class SpringBootPostgresqlApplicationTests {
 
 	@Test
 	@Order(value = 4)
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	void testGetEmployeeById() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/employees/2")).andExpect(status().isOk());
 		Assertions.assertEquals(employees.get(1).getName(), repository.findById(2).get().getName());
@@ -110,12 +112,14 @@ class SpringBootPostgresqlApplicationTests {
 
 	@Test
 	@Order(value = 5)
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	void testDeleteEmployeeById() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/employees/2")).andExpect(status().isOk());
 	}
 
 	@Test
 	@Order(value = 6)
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	void testUpdateEmployee() throws Exception {
 		Employee employee = Employee.builder().id(3).name("Saurav Kumar Shah").address("India East").build();
 		String emp = objectMapper.writeValueAsString(employee);
@@ -127,6 +131,7 @@ class SpringBootPostgresqlApplicationTests {
 
 	@Test
 	@Order(value = 7)
+	@WithMockUser(username = "admin", roles = { "USER", "ADMIN" })
 	void testDeleteAllEmployees() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/employees")).andExpect(status().isOk());
 		Assertions.assertEquals(0, repository.findAll().size());

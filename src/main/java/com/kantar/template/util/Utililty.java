@@ -2,14 +2,16 @@ package com.kantar.template.util;
 
 import java.util.NoSuchElementException;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import com.kantar.template.entity.Employee;
 import com.kantar.template.response.EmployeeDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class EmployeeUtil {
-	private EmployeeUtil() {
+public class Utililty {
+	private Utililty() {
 	}
 
 	public static NoSuchElementException notFound(Integer empId) {
@@ -23,5 +25,10 @@ public class EmployeeUtil {
 
 		log.info("Employee details : {}", employeeDTO);
 		return employeeDTO;
+	}
+
+	public static UsernameNotFoundException usernameNotFoundException(String msg) {
+		log.error("{}", msg);
+		return new UsernameNotFoundException(msg);
 	}
 }
